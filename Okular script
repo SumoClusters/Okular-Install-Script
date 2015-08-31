@@ -92,7 +92,6 @@ echo "Will Cleanup Okular installation"
 cd ~/Downloads
 rm qimageblitz-0.0.6.tar.bz2 libspectre-0.2.7.tar.gz djvulibre-3.5.27.tar.gz tiff-4.0.4.tar.gz ebook-tools-0.2.2.tar.gz chmlib-0.40.tar.gz 
 rm -r qimageblitz-.0.0.6 ebook-tools.0.2.2 chmlib-0.40 tiff-4.0.4 djvulibre-3.5.27 librespectre-0.2.7
-cd ~
 rm -r okular
 
 #    Credits
