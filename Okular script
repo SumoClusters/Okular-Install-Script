@@ -1,0 +1,104 @@
+#!/bin/bash
+echo "Welcome to Okular install Script!"
+
+cd ~/Downloads
+echo "Fetching current version of Okular from Git" 
+git clone git://anongit.kde.org/okular
+cd okular
+mkdir build
+
+echo "installing Poppler dependency"
+cd ~/Downloads
+wget http://poppler.freedesktop.org/poppler-0.35.0.tar.xz
+tar -xvf poppler-0.35.0.tar.xz
+cd poppler-0.35.0
+./configure
+make
+sudo make install
+
+echo "Installing kdelibs5-dev for Okular" 
+sudo apt-get install kdelibs5-dev
+
+echo "Installing libspectre dependency"
+cd ~/Downloads
+wget http://libspectre.freedesktop.org/releases/libspectre-0.2.7.tar.gz
+tar -xvf libspectre-0.2.7.tar.gz
+
+echo "Installing Libgs-dev, libspectre dependency"
+sudo apt-get install libgs-dev
+cd libspectre-0.2.7
+./configure
+make
+sudo make install
+
+echo "Installing DjVuLibre dependency"
+cd ~/Downloads
+wget http://downloads.sourceforge.net/project/djvu/DjVuLibre/3.5.27/djvulibre-3.5.27.tar.gz?r=http%3A%2F%2Fdjvu.sourceforge.net%2F&ts=1439778550&use_mirror=skylineservers
+tar -xvf djvulibre-3.5.27.tar.gz
+cd djvulibre-3.5.27
+./configure
+make
+sudo make install
+sudo update-mime-database /usr/local/share/mime
+sudo update-icon-caches /usr/local/share/icons/hicolor
+
+echo "Installing libTIFF dependency"
+cd ~/Downloads
+wget http://download.osgeo.org/libtiff/tiff-4.0.4.tar.gz
+tar -xvf tiff-4.0.4.tar.gz
+cd tiff-4.0.4
+./configure --prefix=/usr --disable-static &&
+make
+sudo make install
+
+echo "Installing libCHM dependency"
+cd ~/Downloads
+wget http://www.jedrea.com/chmlib/chmlib-0.40.tar.gz
+tar -xvf chmlib-0.40.tar.gz
+cd chmlib-0.40
+./configure
+make
+sudo make install
+
+echo "Installing libepub dependency"
+cd ~/Downloads
+wget http://downloads.sourceforge.net/project/ebook-tools/ebook-tools/0.2.2/ebook-tools-0.2.2.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Febook-tools%2F&ts=1439779665&use_mirror=iweb
+tar -xvf ebook-tools-0.2.2.tar.gz
+cd ebook-tools-0.2.2
+./configure
+make
+sudo make install
+
+echo "Installing QimageBlitz dependency"
+wget http://download.kde.org/stable/qimageblitz/qimageblitz-0.0.6.tar.bz2
+cd ~/Downloads/
+tar -xfj qimageblitz.tar.bz2
+cd qimageblitz-0.0.6
+mkdir build &&
+cd    build &&
+cmake -DCMAKE_INSTALL_PREFIX=$KDE_PREFIX -Wno-dev .. &&
+make
+sudo make install
+
+echo "Installing Okular to /opt/Okular"
+cd ~/Downloads/okular/build
+cmake -DCMAKE_INSTALL_PREFIX=/opt/okular ..
+make 
+sudo make install
+sudo rm /usr/bin/okular
+sudo cp /opt/okular/bin/okular /usr/bin/
+
+echo "Will Cleanup Okular installation"
+cd ~/Downloads
+rm qimageblitz-0.0.6.tar.bz2 libspectre-0.2.7.tar.gz djvulibre-3.5.27.tar.gz tiff-4.0.4.tar.gz ebook-tools-0.2.2.tar.gz chmlib-0.40.tar.gz 
+rm -r qimageblitz-.0.0.6 ebook-tools.0.2.2 chmlib-0.40 tiff-4.0.4 djvulibre-3.5.27 librespectre-0.2.7
+cd ~
+rm -r okular
+
+#    Credits
+# http://askubuntu.com/questions/457011/why-is-libtiff-so-4-not-recognized
+# http://ubuntuforums.org/showthread.php?t=718183
+# https://okular.kde.org/download.php
+# http://www.linuxfromscratch.org/blfs/view/svn/kde/qimageblitz.html
+# https://packages.debian.org/libgs-dev
+# http://www.linuxfromscratch.org/blfs/view/svn/general/libtiff.html
