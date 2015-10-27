@@ -18,4 +18,4 @@ mkdir build
 cd build
 sudo cmake -DCMAKE_INSTALL_PREFIX=/opt/okular
 sudo rm /usr/bin/okular
-sudo cp /opt/okular/okular /usr/bin
+sudo cp /opt/okular/bin/okular /usr/bin
