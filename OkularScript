@@ -7,13 +7,13 @@ wget http://download.kde.org/stable/qimageblitz/qimageblitz-0.0.6.tar.bz2
 tar -xvf qimageblitz-0.0.6.tar.bz2
 cd qimageblitz-0.0.6
 mkdir build
-cd okular/cmake
+cd build
 sudo cmake -DCMAKE_INSTALL_PREFIX=$KDE_PREFIX -Wno-dev ..
 sudo make
 sudo make install 
 cd /tmp
 git clone git://anongit.kde.org/okular
-cd okular
+cd okular/cmake
 mkdir build
 cd build
 sudo cmake -DCMAKE_INSTALL_PREFIX=/opt/okular
