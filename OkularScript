@@ -7,7 +7,7 @@ wget http://download.kde.org/stable/qimageblitz/qimageblitz-0.0.6.tar.bz2
 tar -xvf qimageblitz-0.0.6.tar.bz2
 cd qimageblitz-0.0.6
 mkdir build
-cd cmake
+cd okular/cmake
 sudo cmake -DCMAKE_INSTALL_PREFIX=$KDE_PREFIX -Wno-dev ..
 sudo make
 sudo make install 
